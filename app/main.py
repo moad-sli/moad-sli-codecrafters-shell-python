@@ -10,8 +10,10 @@ def command_not_found(user_input):
 def main():
 
     # Wait for user input
+    sys.stdout.write("$ ")
     command=input()
     while command_not_found(command):
+
         command=input()
 
 if __name__ == "__main__":
