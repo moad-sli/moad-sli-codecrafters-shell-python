@@ -4,7 +4,7 @@ def command_not_found(user_input):
     if user_input == "exit 0":
         return 0
     elif user_input.startswith("echo "):
-        print(user_input.removeprefix("echo "))
+        print(user_input.removeprefix("echo ").strip())
         return 0
     else:
         print(f"{user_input}: command not found")
