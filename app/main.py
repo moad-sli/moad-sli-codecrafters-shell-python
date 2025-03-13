@@ -3,6 +3,9 @@ import sys
 def command_not_found(user_input):
     if user_input == "exit 0":
         return 0
+    elif user_input.startswith("echo "):
+        print(user_input.removeprefix("echo "))
+        return 0
     else:
         print(f"{user_input}: command not found")
         return 1
@@ -10,6 +13,7 @@ def command_not_found(user_input):
 def take_input():
     sys.stdout.write("$ ")
     return input()
+
 def main():
 
     # Wait for user input
