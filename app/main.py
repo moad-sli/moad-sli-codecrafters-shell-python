@@ -1,10 +1,12 @@
 import sys
+import os
+
 all_command=["exit","echo","type"]
 
 def type_command(user_input):
     command = user_input.strip().removeprefix("type").strip().split(" ")[0]
     if command in all_command:
-        print(f"{command} is a shell builtin")
+        print(f"{command} is {os.getenv(command)}")
     else:
         print(f"{command}: not found")
 
