@@ -2,7 +2,7 @@ import sys
 all_command=["exit","echo","type"]
 
 def type_command(user_input):
-    command = user_input.rstrip("type").strip().split(" ")[0]
+    command = user_input.strip().rstrip("type").strip().split(" ")[0]
     if command in all_command:
         print(f"{command} is a shell builtin")
     else:
