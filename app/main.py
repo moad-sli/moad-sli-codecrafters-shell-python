@@ -8,7 +8,9 @@ command_path=os.getenv("PATH").split(os.pathsep)
 def type_command(user_input):
     list_of_paths=os.getenv("PATH").split(os.pathsep)
     command = user_input.strip().removeprefix("type").strip().split(" ")[0]
-    if os.getenv("PATH"):
+    if command in all_command:
+        print(f"{command} is a shell builtin")
+    else:
         for path in list_of_paths:
             command_path = path + "/" + command
             if command_path in glob.glob(path + "/*"):
@@ -16,12 +18,6 @@ def type_command(user_input):
                 return 1
         else:
             print(f"{command}: not found")
-
-    else:
-        if command in all_command:
-            print(f"{command} is a shell builtin")
-        else:
-            print(f"{command} invalid_command")
     return 1
 
 
