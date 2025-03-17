@@ -10,7 +10,7 @@ def type_command(user_input):
     command = user_input.strip().removeprefix("type").strip().split(" ")[0]
     for path in list_of_paths:
         command_path = path+"/"+command
-        if command_path in glob.glob(path):
+        if command_path in glob.glob(path+"/*"):
             print(f"{command} is {command_path}")
             break
     else:
