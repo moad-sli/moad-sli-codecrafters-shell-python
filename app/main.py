@@ -1,3 +1,4 @@
+import glob
 import sys
 import os
 
@@ -8,8 +9,10 @@ def type_command(user_input):
     list_of_paths=os.getenv("PATH").split(os.pathsep)
     command = user_input.strip().removeprefix("type").strip().split(" ")[0]
     for path in list_of_paths:
-        if command in os.listdir(path):
-            print(f"{command} is {path}/{command}")
+        command_path = path+"/"+command
+        if command_path in glob.glob(path):
+            print(f"{command} is {command_path}")
+            break
     else:
         print(f"{command}: not found")
 
