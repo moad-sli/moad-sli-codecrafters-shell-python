@@ -2,11 +2,14 @@ import sys
 import os
 
 all_command=["exit","echo","type"]
+command_path=os.getenv("PATH").split(os.pathsep)
 
 def type_command(user_input):
+    list_of_paths=os.getenv("PATH").split(os.pathsep)
     command = user_input.strip().removeprefix("type").strip().split(" ")[0]
-    if command in all_command:
-        print(f"{command} is {os.getenv(command)}")
+    for path in list_of_paths:
+        if command in os.listdir(path):
+            print(f"{command} is {path}/{command}")
     else:
         print(f"{command}: not found")
 
