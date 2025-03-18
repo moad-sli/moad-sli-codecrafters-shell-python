@@ -33,7 +33,7 @@ def run_command(user_input):
     command_path=command_in_path(command)
     if command_path:
         args=user_input.strip().removeprefix(command).strip()
-        return os.system(command_path+" "+args)
+        return os.system(user_input)
     else:
         return 1
 
