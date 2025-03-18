@@ -4,22 +4,38 @@ import os
 
 all_command=["exit","echo","type"]
 command_path=os.getenv("PATH").split(os.pathsep)
+list_of_paths=os.getenv("PATH").split(os.pathsep)
+
+
+def command_in_path(command):
+    for path in list_of_paths:
+        command_path = path + "/" + command
+        if command_path in glob.glob(path + "/*"):
+            return command_path
+    return False
 
 def type_command(user_input):
-    list_of_paths=os.getenv("PATH").split(os.pathsep)
+
     command = user_input.strip().removeprefix("type").strip().split(" ")[0]
     if command in all_command:
         print(f"{command} is a shell builtin")
     else:
-        for path in list_of_paths:
-            command_path = path + "/" + command
-            if command_path in glob.glob(path + "/*"):
+        command_path=command_in_path(command)
+        if command_path:
                 print(f"{command} is {command_path}")
                 return 1
         else:
             print(f"{command}: not found")
     return 1
 
+def run_command(user_input):
+    command=user_input.strip().split(" ")[0]
+    command_path=command_in_path(command)
+    if command_path:
+        args=user_input.strip().removeprefix(command).strip()
+        return os.system(command_path+" "+args)
+    else:
+        return 1
 
 def command_not_found(user_input):
     if user_input == "exit 0":
@@ -31,8 +47,11 @@ def command_not_found(user_input):
         type_command(user_input)
         return 1
     else:
-        print(f"{user_input}: command not found")
-        return 1
+        if run_command(user_input)==0:
+            return 1
+        else:
+            print(f"{user_input}: command not found")
+            return 1
 
 def take_input():
     sys.stdout.write("$ ")
