@@ -37,7 +37,7 @@ def run_command(user_input):
     else:
         return 1
 def cd_command(user_input):
-    path=user_input.remveprefix("cd").strip()
+    path=user_input.removeprefix("cd").strip()
     try:
         os.chdir(path)
     except:
