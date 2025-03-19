@@ -36,6 +36,7 @@ def run_command(user_input):
         return os.system(user_input)
     else:
         return 1
+
 def cd_command(user_input):
     path=user_input.removeprefix("cd").strip()
     if path == "~":
@@ -44,7 +45,9 @@ def cd_command(user_input):
         os.chdir(path)
     except:
         print(f"cd: {path}: No such file or directory")
+
 def command_not_found(user_input):
+    user_input.replace("'","")
     if user_input == "exit 0":
         return 0
     elif user_input.startswith("echo "):
