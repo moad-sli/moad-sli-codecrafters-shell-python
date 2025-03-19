@@ -45,7 +45,7 @@ def command_not_found(user_input):
     elif user_input.startswith("type"):
         type_command(user_input)
     elif user_input.startswith("cd"):
-        os.chdir(user_input.removeprefix("cd"))
+        os.chdir(user_input.removeprefix("cd").strip())
     elif user_input.strip()=="pwd":
         print(os.path.abspath(os.getcwd()))
     else:
