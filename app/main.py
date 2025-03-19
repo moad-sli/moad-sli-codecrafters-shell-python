@@ -2,7 +2,7 @@ import glob
 import sys
 import os
 
-all_command=["exit","echo","type","pwd"]
+all_command=["exit","echo","type","pwd","cd"]
 command_path=os.getenv("PATH").split(os.pathsep)
 list_of_paths=os.getenv("PATH").split(os.pathsep)
 
@@ -44,6 +44,8 @@ def command_not_found(user_input):
         print(user_input.removeprefix("echo ").strip())
     elif user_input.startswith("type"):
         type_command(user_input)
+    elif user_input.startswith("cd"):
+        os.chdir(user_input.removeprefix("cd"))
     elif user_input.strip()=="pwd":
         print(os.path.abspath(os.getcwd()))
     else:
