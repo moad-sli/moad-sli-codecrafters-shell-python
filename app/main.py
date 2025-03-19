@@ -38,6 +38,8 @@ def run_command(user_input):
         return 1
 def cd_command(user_input):
     path=user_input.removeprefix("cd").strip()
+    if path == "~":
+        path="/home/user"
     try:
         os.chdir(path)
     except:
