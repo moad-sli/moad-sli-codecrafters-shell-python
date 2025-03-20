@@ -48,6 +48,7 @@ def cd_command(user_input):
 
 def command_not_found(user_input):
     user_input=user_input.replace("'",'')
+
     if user_input == "exit 0":
         return 0
     elif user_input.startswith("echo "):
