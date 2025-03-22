@@ -3,6 +3,8 @@ import sys
 import os
 import shlex
 
+from Crypto.SelfTest.Cipher.test_CBC import file_name
+
 all_command=["exit","echo","type","pwd","cd"]
 command_path=os.getenv("PATH").split(os.pathsep)
 list_of_paths=os.getenv("PATH").split(os.pathsep)
@@ -15,15 +17,15 @@ def command_in_path(command):
             return command_path
     return False
 
-def type_command(user_input):
+def type_command(user_input,file_object=None):
 
     command = user_input.strip().removeprefix("type").strip().split(" ")[0]
     if command in all_command:
-        print(f"{command} is a shell builtin")
+        print(f"{command} is a shell builtin",file=file_object)
     else:
         command_path=command_in_path(command)
         if command_path:
-                print(f"{command} is {command_path}")
+                print(f"{command} is {command_path}",file=file_object)
                 return 1
         else:
             print(f"{command}: not found")
@@ -47,17 +49,22 @@ def cd_command(user_input):
     except:
         print(f"cd: {path}: No such file or directory")
 
-def command_not_found(user_input):
+def exec_command(user_input):
+    if "1>" in user_input or '>' in user_input:
+        file_name=user_input.split(">")[1].strip()
+        file_object=open(file_name,"w")
+    else:
+        file_object=None
     if user_input == "exit 0":
         return 0
     elif user_input.startswith("echo "):
-        print(' '.join(shlex.split(user_input.removeprefix("echo ").strip())))
+        print(' '.join(shlex.split(user_input.removeprefix("echo ").strip())),file=file_object)
     elif user_input.startswith("type"):
-        type_command(user_input)
+        type_command(user_input,file_object)
     elif user_input.startswith("cd"):
        cd_command(user_input)
     elif user_input.strip()=="pwd":
-        print(os.path.abspath(os.getcwd()))
+        print(os.path.abspath(os.getcwd()),file=file_object)
     else:
         if run_command(user_input)==0:
             pass
@@ -73,7 +80,7 @@ def main():
 
     # Wait for user input
     command=take_input()
-    while command_not_found(command):
+    while exec_command(command):
         command=take_input()
 
 if __name__ == "__main__":
