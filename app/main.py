@@ -52,18 +52,19 @@ def exec_command(user_input):
     if "1>" in user_input or '>' in user_input:
         file_name=user_input.split(">")[1].strip()
         file_object=open(file_name,"w")
-        user_input=user_input.split(">")[0]
+        command=user_input.split(">")[0]
     else:
+        command=user_input
         file_object=None
-    if user_input == "exit 0":
+    if command == "exit 0":
         return 0
-    elif user_input.startswith("echo "):
-        print(' '.join(shlex.split(user_input.removeprefix("echo ").strip())),file=file_object)
-    elif user_input.startswith("type"):
-        type_command(user_input,file_object)
+    elif command.startswith("echo "):
+        print(' '.join(shlex.split(command.removeprefix("echo ").strip())),file=file_object)
+    elif command.startswith("type"):
+        type_command(command,file_object)
     elif user_input.startswith("cd"):
        cd_command(user_input)
-    elif user_input.strip()=="pwd":
+    elif command.strip()=="pwd":
         print(os.path.abspath(os.getcwd()),file=file_object)
     else:
         if run_command(user_input)==0:
