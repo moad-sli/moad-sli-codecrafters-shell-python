@@ -1,6 +1,7 @@
 import glob
 import sys
 import os
+import shlex
 
 all_command=["exit","echo","type","pwd","cd"]
 command_path=os.getenv("PATH").split(os.pathsep)
@@ -47,12 +48,10 @@ def cd_command(user_input):
         print(f"cd: {path}: No such file or directory")
 
 def command_not_found(user_input):
-    user_input=user_input.replace("'",'')
-
     if user_input == "exit 0":
         return 0
     elif user_input.startswith("echo "):
-        print(" ".join(list(filter(lambda  x:x.strip()!="",user_input.removeprefix("echo ").split(" ")))))
+        print(' '.join(shlex.split(user_input.removeprefix("echo ").strip())))
     elif user_input.startswith("type"):
         type_command(user_input)
     elif user_input.startswith("cd"):
