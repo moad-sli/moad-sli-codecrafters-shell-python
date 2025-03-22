@@ -52,7 +52,7 @@ def exec_command(user_input):
     if "1>" in user_input or '>' in user_input:
         file_name=user_input.split(">")[1].strip()
         file_object=open(file_name,"w")
-        user_input=user_input.strip(">")[0]
+        user_input=user_input.split(">")[0]
     else:
         file_object=None
     if user_input == "exit 0":
