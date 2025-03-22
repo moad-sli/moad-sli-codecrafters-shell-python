@@ -3,7 +3,6 @@ import sys
 import os
 import shlex
 
-from Crypto.SelfTest.Cipher.test_CBC import file_name
 
 all_command=["exit","echo","type","pwd","cd"]
 command_path=os.getenv("PATH").split(os.pathsep)
