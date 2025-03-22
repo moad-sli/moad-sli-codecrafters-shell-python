@@ -30,7 +30,7 @@ def type_command(user_input):
     return 1
 
 def run_command(user_input):
-    command=shlex.split()[0]
+    command=shlex.split(user_input)[0]
     command_path=command_in_path(command)
     if command_path:
         #args=user_input.strip().removeprefix(command).strip()
