@@ -19,7 +19,7 @@ def complete(text,state):
 def display_matches(input,matches,state):
     print()
     if matches:
-        print("  ".join(matches))
+        print(" ".join(matches))
     print("$ " + input, end="")
 
 readline.set_completer(complete)
