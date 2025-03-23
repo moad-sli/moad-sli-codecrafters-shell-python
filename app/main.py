@@ -4,7 +4,7 @@ import os
 import shlex
 import readline
 
-options = ['echo', 'exit']
+options = ['echo ', 'exit ']
 
 
 all_command=["exit","echo","type","pwd","cd"]
