@@ -17,6 +17,7 @@ def complete(text,state):
         return matches[state]+" "
     return None
 def display_matches(input,matches,state):
+    print()
     if matches:
         print("  ".join(matches))
     print("$ " + input, end="")
