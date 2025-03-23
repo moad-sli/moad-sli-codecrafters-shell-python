@@ -2,11 +2,25 @@ import glob
 import sys
 import os
 import shlex
+import readline
+
+options = ['echo', 'exit']
 
 
 all_command=["exit","echo","type","pwd","cd"]
 command_path=os.getenv("PATH").split(os.pathsep)
 list_of_paths=os.getenv("PATH").split(os.pathsep)
+
+def complete(text,state):
+    matches = [option for option in options if option.startswith(text)]
+
+    # Return the match based on the state
+    if state < len(matches):
+        return matches[state]  # Return the current match
+    return None  # No more matches
+
+readline.set_completer(complete)
+readline.parse_and_bind('tab: complete')
 
 
 def command_in_path(command):
