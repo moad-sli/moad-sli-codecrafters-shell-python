@@ -52,7 +52,7 @@ def std_redirection(user_input):
         command = user_input.split("2>")[0]
         file_object=None
     elif "1>>" in user_input or ">>" in user_input:
-        user_input = user_input.replace("1>>", ">")
+        user_input = user_input.replace("1>>", ">>")
         file_name = user_input.split(">>")[1].strip()
         file_object = open(file_name, "a")
         command = user_input.split(">")[0]
