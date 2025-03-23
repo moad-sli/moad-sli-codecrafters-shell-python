@@ -16,9 +16,13 @@ def complete(text,state):
     if state < len(matches):
         return matches[state]+" "
     return None
+def display_matches(input,matches,state):
+    if matches:
+        print("  ".join(matches))
 
 readline.set_completer(complete)
 readline.parse_and_bind('tab: complete')
+readline.set_completion_display_matches_hook(display_matches)
 
 def command_in_path(command):
     for path in list_of_paths:
