@@ -13,15 +13,12 @@ options = [command.split("/")[-1]+" " for path in list_of_paths for command in g
 
 def complete(text,state):
     matches = [option for option in options if option.startswith(text)]
-
-    # Return the match based on the state
     if state < len(matches):
-        return matches[state]  # Return the current match
-    return None  # No more matches
+        return matches[state]
+    return None
 
 readline.set_completer(complete)
 readline.parse_and_bind('tab: complete')
-
 
 def command_in_path(command):
     for path in list_of_paths:
