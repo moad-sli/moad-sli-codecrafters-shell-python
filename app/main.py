@@ -19,6 +19,7 @@ def complete(text,state):
 def display_matches(input,matches,state):
     if matches:
         print("  ".join(matches))
+    print("$ " + input, end="")
 
 readline.set_completer(complete)
 readline.parse_and_bind('tab: complete')
