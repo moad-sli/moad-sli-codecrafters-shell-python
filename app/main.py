@@ -4,12 +4,12 @@ import os
 import shlex
 import readline
 
-options = ['echo ', 'exit ']
 
 
 all_command=["exit","echo","type","pwd","cd"]
 command_path=os.getenv("PATH").split(os.pathsep)
 list_of_paths=os.getenv("PATH").split(os.pathsep)
+options = [command.split("/")[-1]+" " for path in list_of_paths for command in glob.glob(path+"/*") ]
 
 def complete(text,state):
     matches = [option for option in options if option.startswith(text)]
