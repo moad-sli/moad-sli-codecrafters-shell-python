@@ -48,8 +48,12 @@ def cd_command(user_input):
     except:
         print(f"cd: {path}: No such file or directory")
 def std_redirection(user_input):
-    if "2>" in user_input:
-        open(user_input.split("2>")[1].strip(),"w")
+    if "2>>" in user_input:
+        error_file=open(user_input.split("2>>")[1].strip(),"w")
+        command = user_input.split("2>>")[0]
+        file_object=None
+    elif "2>" in user_input:
+        error_file=open(user_input.split("2>")[1].strip(),"w")
         command = user_input.split("2>")[0]
         file_object=None
     elif "1>>" in user_input or ">>" in user_input:
