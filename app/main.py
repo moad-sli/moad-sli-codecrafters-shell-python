@@ -47,12 +47,15 @@ def cd_command(user_input):
         os.chdir(path)
     except:
         print(f"cd: {path}: No such file or directory")
-
-def exec_command(user_input):
+def std_redirection(user_input):
     if "2>" in user_input:
-        error_file=open(user_input.split(">")[1].strip(),"w")
         command = user_input.split("2>")[0]
         file_object=None
+    elif "1>>" in user_input or ">>" in user_input:
+        user_input = user_input.replace("1>>", ">")
+        file_name = user_input.split(">>")[1].strip()
+        file_object = open(file_name, "a")
+        command = user_input.split(">")[0]
     elif "1>" in user_input or '>' in user_input:
         user_input=user_input.replace("1>",">")
         file_name=user_input.split(">")[1].strip()
@@ -61,6 +64,11 @@ def exec_command(user_input):
     else:
         command=user_input
         file_object=None
+    return command,file_object
+
+def exec_command(user_input):
+    command,file_object = std_redirection(user_input)
+
     if command == "exit 0":
         return 0
     elif command.startswith("echo "):
