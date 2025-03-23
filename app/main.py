@@ -93,7 +93,13 @@ def exec_command(user_input):
 
 def take_input():
     sys.stdout.write("$ ")
-    return input()
+    command = input()
+    if command.startswith("ech\t"):
+        command="echo"
+    elif command.startswith("exi\t"):
+        command="exit"
+    return command
+
 
 def main():
 
