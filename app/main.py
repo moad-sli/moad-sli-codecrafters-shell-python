@@ -9,13 +9,12 @@ import readline
 all_command=["exit","echo","type","pwd","cd"]
 command_path=os.getenv("PATH").split(os.pathsep)
 list_of_paths=os.getenv("PATH").split(os.pathsep)
-options = ([command.split("/")[-1]+" " for path in list_of_paths for command in glob.glob(path+"/*") ]+
-           list(map(lambda  x:x+" ",all_command)))
+options = [command.split("/")[-1] for path in list_of_paths for command in glob.glob(path+"/*") ]+all_command
 
 def complete(text,state):
     matches = [option for option in options if option.startswith(text)]
     if state < len(matches):
-        return matches[state]
+        return matches[state]+" "
     return None
 
 readline.set_completer(complete)
