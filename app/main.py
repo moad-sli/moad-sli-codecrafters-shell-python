@@ -68,7 +68,7 @@ def exec_command(user_input):
     elif command.strip()=="pwd":
         print(os.path.abspath(os.getcwd()),file=file_object)
     else:
-        if run_command(user_input)==0:
+        if run_command(user_input) in [0,256]:
             pass
         else:
             print(f"{user_input}: command not found")
